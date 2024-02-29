@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://chl2261aqiena"]
+
+[ext_resource type="PackedScene" uid="uid://ougfndw7a5lo" path="res://projectiles/laser.tscn" id="1_xbuou"]
+[ext_resource type="Script" path="res://projectiles/enemy_laser.gd" id="2_0ghk5"]
+[ext_resource type="Texture2D" uid="uid://dwxy0nrk7kr4c" path="res://projectiles/enemylaser.png" id="2_r64v1"]
+
+[node name="EnemyLaser" instance=ExtResource("1_xbuou")]
+script = ExtResource("2_0ghk5")
+
+[node name="Laser" parent="." index="0"]
+texture = ExtResource("2_r64v1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

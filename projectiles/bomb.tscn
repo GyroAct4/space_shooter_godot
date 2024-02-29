@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://byyxfurr8ip1u"]
+
+[ext_resource type="Texture2D" uid="uid://bdl2hjcvym1yv" path="res://projectiles/bomb.png" id="1_oshw1"]
+[ext_resource type="Script" path="res://projectiles/bomb.gd" id="1_xpjgg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b8opy"]
+radius = 7.0
+
+[node name="Bomb" type="Area2D"]
+modulate = Color(1, 1, 1, 0.14902)
+collision_layer = 4
+collision_mask = 18
+script = ExtResource("1_xpjgg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b8opy")
+metadata/_edit_lock_ = true
+
+[node name="Bombimg" type="Sprite2D" parent="."]
+scale = Vector2(0.104688, 0.1)
+texture = ExtResource("1_oshw1")
+
+[node name="die" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="die" to="." method="_on_die_timeout"]

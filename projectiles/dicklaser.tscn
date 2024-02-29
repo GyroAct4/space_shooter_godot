@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvhb5mji0xkuk"]
+
+[ext_resource type="Script" path="res://projectiles/dicklaser.gd" id="1_am24f"]
+[ext_resource type="Texture2D" uid="uid://b24gm8ahq55rd" path="res://projectiles/dickbeam.png" id="1_bjqq7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ecnay"]
+size = Vector2(38, 1204.5)
+
+[node name="Dicklaser" type="Area2D"]
+collision_layer = 16
+script = ExtResource("1_am24f")
+
+[node name="Dickbeam" type="Sprite2D" parent="."]
+position = Vector2(1, 602)
+texture = ExtResource("1_bjqq7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 602.25)
+shape = SubResource("RectangleShape2D_ecnay")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

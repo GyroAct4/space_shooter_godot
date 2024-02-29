@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj2vup3p5qpds"]
+
+[ext_resource type="Script" path="res://projectiles/actbomb.gd" id="1_5oxjn"]
+[ext_resource type="Texture2D" uid="uid://fhrgsvbervoi" path="res://projectiles/actbomb-export.png" id="2_jw7jx"]
+[ext_resource type="Texture2D" uid="uid://tt51mltq03du" path="res://projectiles/bombring.png" id="3_egafx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t018e"]
+radius = 35.0143
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o6q46"]
+radius = 143.003
+
+[node name="Actbomb" type="Area2D"]
+process_priority = 1
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_5oxjn")
+
+[node name="Actbomb-export" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+texture = ExtResource("2_jw7jx")
+
+[node name="Bombring" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(2.4, 2.4)
+texture = ExtResource("3_egafx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_t018e")
+metadata/_edit_lock_ = true
+
+[node name="bombarea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bombarea"]
+shape = SubResource("CircleShape2D_o6q46")
+debug_color = Color(0.560784, 0.415686, 0.952941, 0.419608)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

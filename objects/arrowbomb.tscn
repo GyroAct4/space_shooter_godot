@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c51wysor767ks"]
+
+[ext_resource type="PackedScene" uid="uid://rjkpnbloi3gd" path="res://objects/arrowship.tscn" id="1_7vup5"]
+[ext_resource type="Script" path="res://objects/arrowbomb.gd" id="2_04hsb"]
+[ext_resource type="Texture2D" uid="uid://du3aserpotfwk" path="res://arrowbomb.png" id="2_27guh"]
+[ext_resource type="Texture2D" uid="uid://tt51mltq03du" path="res://projectiles/bombring.png" id="4_ts5yj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bvlk5"]
+radius = 219.021
+
+[node name="Arrowbomb" instance=ExtResource("1_7vup5")]
+collision_layer = 16
+script = ExtResource("2_04hsb")
+
+[node name="Arrowshipimg" parent="." index="0"]
+texture = ExtResource("2_27guh")
+
+[node name="bombradius" type="Area2D" parent="." index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bombradius" index="0"]
+shape = SubResource("CircleShape2D_bvlk5")
+debug_color = Color(0.960784, 0, 0.517647, 0.419608)
+
+[node name="Boom" type="Timer" parent="." index="3"]
+wait_time = 0.7
+one_shot = true
+
+[node name="Bombring" type="Sprite2D" parent="." index="4"]
+visible = false
+scale = Vector2(3.4, 3.4)
+texture = ExtResource("4_ts5yj")
+
+[connection signal="timeout" from="Boom" to="." method="_on_boom_timeout"]

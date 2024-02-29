@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwoil2cw645k6"]
+
+[ext_resource type="PackedScene" uid="uid://jxoxyc2nv2id" path="res://objects/enemy_1.tscn" id="1_l2wij"]
+[ext_resource type="Texture2D" uid="uid://dvab4jt5fgcxy" path="res://objects/enemy2.png" id="2_h75kv"]
+[ext_resource type="Script" path="res://objects/enemy_2.gd" id="2_toy04"]
+
+[node name="Enemy2" instance=ExtResource("1_l2wij")]
+script = ExtResource("2_toy04")
+
+[node name="Enemy1" parent="." index="0"]
+texture = ExtResource("2_h75kv")
+
+[node name="laserpos" type="Marker2D" parent="." index="2"]
+position = Vector2(0, 50)
+
+[node name="shoot" type="Timer" parent="." index="3"]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="shoot" to="." method="_on_shoot_timeout"]

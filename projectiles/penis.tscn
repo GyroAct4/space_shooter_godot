@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk5is1oq2hssu"]
+
+[ext_resource type="Script" path="res://projectiles/penis.gd" id="1_lb0o7"]
+[ext_resource type="Texture2D" uid="uid://bsfi5hu2ceq47" path="res://projectiles/penis.png" id="1_qfuv3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_amf1m"]
+radius = 79.0
+height = 258.0
+
+[node name="Penis" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_lb0o7")
+
+[node name="Penisimg" type="Sprite2D" parent="."]
+position = Vector2(-2, 81)
+texture = ExtResource("1_qfuv3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 74)
+shape = SubResource("CapsuleShape2D_amf1m")
+
+[node name="beamstart" type="Marker2D" parent="."]
+position = Vector2(-3, 180)
+
+[node name="Beamlife" type="Timer" parent="."]
+one_shot = true

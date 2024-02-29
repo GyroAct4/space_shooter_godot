@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://bkwy2awarxfy2"]
+
+[ext_resource type="Script" path="res://projectiles/level.gd" id="1_bn8nd"]
+[ext_resource type="Texture2D" uid="uid://cbvggf1l6lpkk" path="res://space.png" id="1_r3k3c"]
+[ext_resource type="PackedScene" uid="uid://bcsbhfr7u4fvs" path="res://objects/tahmidul.tscn" id="3_8qblg"]
+[ext_resource type="PackedScene" uid="uid://esvia3p838gn" path="res://objects/ship.tscn" id="3_765fu"]
+[ext_resource type="Script" path="res://scenes/Enemies.gd" id="3_l6dhf"]
+[ext_resource type="Script" path="res://projectiles/Projectiles.gd" id="4_b1msh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ilbq"]
+size = Vector2(568, 928)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_or7i0"]
+size = Vector2(1918, 348)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37r4o"]
+size = Vector2(1200, 949)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxbdh"]
+size = Vector2(1612, 338)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_bn8nd")
+metadata/_edit_lock_ = true
+
+[node name="Space" type="Sprite2D" parent="."]
+position = Vector2(801.5, 453.5)
+scale = Vector2(1.609, 0.917)
+texture = ExtResource("1_r3k3c")
+metadata/_edit_lock_ = true
+
+[node name="Enemies" type="Node2D" parent="."]
+script = ExtResource("3_l6dhf")
+metadata/_edit_lock_ = true
+
+[node name="Tahmidul" parent="Enemies" instance=ExtResource("3_8qblg")]
+position = Vector2(828, 181)
+
+[node name="Projectiles" type="Node2D" parent="."]
+script = ExtResource("4_b1msh")
+metadata/_edit_lock_ = true
+
+[node name="Ship" parent="." instance=ExtResource("3_765fu")]
+position = Vector2(816, 698)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(3, 3)
+
+[node name="Playerlabel" type="Label" parent="."]
+offset_top = 808.0
+offset_right = 318.0
+offset_bottom = 905.0
+scale = Vector2(3, 3)
+
+[node name="Win" type="Label" parent="."]
+visible = false
+offset_left = 574.0
+offset_top = 447.0
+offset_right = 919.0
+offset_bottom = 545.0
+scale = Vector2(3, 3)
+text = "TO BE CONTINUED . . ."
+
+[node name="walls" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 129
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
+position = Vector2(-286, 459)
+shape = SubResource("RectangleShape2D_1ilbq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
+position = Vector2(960, -180)
+shape = SubResource("RectangleShape2D_or7i0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls"]
+position = Vector2(2204, 467)
+shape = SubResource("RectangleShape2D_37r4o")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls"]
+position = Vector2(808, 1083)
+shape = SubResource("RectangleShape2D_rxbdh")
+
+[connection signal="attack" from="Enemies/Tahmidul" to="." method="_on_tahmidul_attack"]
+[connection signal="die" from="Enemies/Tahmidul" to="." method="_on_tahmidul_die"]
+[connection signal="spawn" from="Enemies/Tahmidul" to="." method="_on_tahmidul_spawn"]
+[connection signal="bomb" from="Ship" to="." method="_on_ship_bomb"]
+[connection signal="laser" from="Ship" to="." method="_on_ship_laser"]
